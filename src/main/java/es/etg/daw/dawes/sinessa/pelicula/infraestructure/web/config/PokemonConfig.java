@@ -4,7 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import es.etg.daw.dawes.sinessa.pelicula.application.command.service.CreatePeliculaService;
+import es.etg.daw.dawes.sinessa.pelicula.application.command.service.FindPeliculaService;
 import es.etg.daw.dawes.sinessa.pelicula.application.command.usecase.CreatePeliculaUseCase;
+import es.etg.daw.dawes.sinessa.pelicula.application.command.usecase.FindPeliculaUseCase;
 import lombok.RequiredArgsConstructor;
 
 @Configuration 
@@ -19,6 +21,16 @@ public class PokemonConfig {
     @Bean 
     public CreatePeliculaService createPeliculaService(){
         return new CreatePeliculaService(createPeliculaUseCase());
+    }
+
+    @Bean 
+    public FindPeliculaUseCase findPeliculaUseCase(){
+        return new FindPeliculaUseCase();
+    }
+
+    @Bean 
+    public FindPeliculaService findPeliculaService(){
+        return new FindPeliculaService(findPeliculaUseCase());
     }
     
 }
