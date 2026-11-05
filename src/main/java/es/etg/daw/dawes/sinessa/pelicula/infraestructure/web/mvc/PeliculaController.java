@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import es.etg.daw.dawes.sinessa.pelicula.application.command.CreatePeliculaCommand;
 import es.etg.daw.dawes.sinessa.pelicula.application.command.service.CreatePeliculaService;
@@ -14,13 +13,14 @@ import es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc.dto.PeliculaReq
 import es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc.dto.PeliculaResponse;
 import lombok.RequiredArgsConstructor;
 
-@RestController
+@Controller
 @RequestMapping("/peliculas")
 @RequiredArgsConstructor
 public class PeliculaController {
 
     private final CreatePeliculaService createPeliculaService;
 
+    @ResponseBody 
     @PostMapping
     public PeliculaResponse createPelicula(PeliculaRequest request) {
         CreatePeliculaCommand comando = PeliculaMapper.toCommand(request);
