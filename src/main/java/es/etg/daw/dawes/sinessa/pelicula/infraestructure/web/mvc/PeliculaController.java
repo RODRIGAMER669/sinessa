@@ -2,14 +2,18 @@ package es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.etg.daw.dawes.sinessa.pelicula.application.command.CreatePeliculaCommand;
 import es.etg.daw.dawes.sinessa.pelicula.application.command.service.CreatePeliculaService;
+import es.etg.daw.dawes.sinessa.pelicula.application.command.service.DeletePeliculaService;
 import es.etg.daw.dawes.sinessa.pelicula.application.command.service.FindPeliculaService;
 import es.etg.daw.dawes.sinessa.pelicula.domain.model.Pelicula;
 import es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mapper.PeliculaMapper;
@@ -24,6 +28,7 @@ public class PeliculaController {
 
     private final CreatePeliculaService createPeliculaService;
     private final FindPeliculaService findPeliculaService;
+    private final DeletePeliculaService deletePeliculaService;
 
     @ResponseBody 
     @PostMapping
@@ -40,6 +45,12 @@ public class PeliculaController {
                 .stream()
                 .map(PeliculaMapper::toResponse)
                 .toList();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletePelicula(@PathVariable int id) {
+        deletePeliculaService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
