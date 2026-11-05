@@ -57,7 +57,7 @@ public class PeliculaController {
         deletePeliculaService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
+    @ResponseBody
     @PutMapping("/{id}")
     public PeliculaResponse editPelicula(@PathVariable int id, @RequestBody PeliculaRequest peliculaRequest) {
         EditPeliculaCommand comando = PeliculaMapper.toCommand(id, peliculaRequest);

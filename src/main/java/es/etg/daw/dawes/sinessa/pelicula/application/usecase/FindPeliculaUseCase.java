@@ -1,4 +1,4 @@
-package es.etg.daw.dawes.sinessa.pelicula.application.command.usecase;
+package es.etg.daw.dawes.sinessa.pelicula.application.usecase;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

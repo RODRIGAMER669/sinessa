@@ -10,20 +10,20 @@ public class PeliculaMapper {
 
     public static CreatePeliculaCommand toCommand(PeliculaRequest request) {
         return new CreatePeliculaCommand(request.titulo(), request.imagen(),
-                                         request.detalles(), request.sinopsis(),
-                                         request.genero(), request.duracion(),
-                                         request.fechaEstreno());
+                request.detalles(), request.sinopsis(),
+                request.genero(), request.duracion(),
+                request.fechaEstreno());
     }
 
     public static PeliculaResponse toResponse(Pelicula pelicula) {
         return new PeliculaResponse(pelicula.getId(), pelicula.getTitulo(),
-                                    pelicula.getImagen(), pelicula.getDetalles(),
-                                    pelicula.getSinopsis(), pelicula.getGenero(),
-                                    pelicula.getDuracion(), pelicula.getFechaEstreno(),
-                                    pelicula.getFechaCreacion());
+                pelicula.getImagen(), pelicula.getDetalles(),
+                pelicula.getSinopsis(), pelicula.getGenero(),
+                pelicula.getDuracion(), pelicula.getFechaEstreno(),
+                pelicula.getFechaCreacion());
     }
 
     public static EditPeliculaCommand toCommand(int id, PeliculaRequest request) {
-    return new EditPeliculaCommand(id, request.imagen(), request.sinopsis(), request.duracion());
-}
+        return new EditPeliculaCommand(id, request.imagen(), request.sinopsis(), request.duracion());
+    }
 }

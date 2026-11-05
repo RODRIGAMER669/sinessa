@@ -1,8 +1,8 @@
-package es.etg.daw.dawes.sinessa.pelicula.application.command.service;
+package es.etg.daw.dawes.sinessa.pelicula.application.service;
 
 import org.springframework.stereotype.Service;
 
-import es.etg.daw.dawes.sinessa.pelicula.application.command.usecase.DeletePeliculaUseCase;
+import es.etg.daw.dawes.sinessa.pelicula.application.usecase.DeletePeliculaUseCase;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
