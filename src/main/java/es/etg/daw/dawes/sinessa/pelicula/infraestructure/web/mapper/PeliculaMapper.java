@@ -1,6 +1,7 @@
 package es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mapper;
 
 import es.etg.daw.dawes.sinessa.pelicula.application.command.CreatePeliculaCommand;
+import es.etg.daw.dawes.sinessa.pelicula.application.command.EditPeliculaCommand;
 import es.etg.daw.dawes.sinessa.pelicula.domain.model.Pelicula;
 import es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc.dto.PeliculaRequest;
 import es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc.dto.PeliculaResponse;
@@ -21,4 +22,8 @@ public class PeliculaMapper {
                                     pelicula.getDuracion(), pelicula.getFechaEstreno(),
                                     pelicula.getFechaCreacion());
     }
+
+    public static EditPeliculaCommand toCommand(int id, PeliculaRequest request) {
+    return new EditPeliculaCommand(id, request.imagen(), request.sinopsis(), request.duracion());
+}
 }

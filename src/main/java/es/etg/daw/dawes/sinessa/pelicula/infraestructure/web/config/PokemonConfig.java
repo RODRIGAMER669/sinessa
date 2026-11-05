@@ -3,12 +3,14 @@ package es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import es.etg.daw.dawes.sinessa.pelicula.application.command.service.CreatePeliculaService;
-import es.etg.daw.dawes.sinessa.pelicula.application.command.service.DeletePeliculaService;
-import es.etg.daw.dawes.sinessa.pelicula.application.command.service.FindPeliculaService;
-import es.etg.daw.dawes.sinessa.pelicula.application.command.usecase.CreatePeliculaUseCase;
-import es.etg.daw.dawes.sinessa.pelicula.application.command.usecase.DeletePeliculaUseCase;
-import es.etg.daw.dawes.sinessa.pelicula.application.command.usecase.FindPeliculaUseCase;
+import es.etg.daw.dawes.sinessa.pelicula.application.service.CreatePeliculaService;
+import es.etg.daw.dawes.sinessa.pelicula.application.service.DeletePeliculaService;
+import es.etg.daw.dawes.sinessa.pelicula.application.service.EditPeliculaService;
+import es.etg.daw.dawes.sinessa.pelicula.application.service.FindPeliculaService;
+import es.etg.daw.dawes.sinessa.pelicula.application.usecase.CreatePeliculaUseCase;
+import es.etg.daw.dawes.sinessa.pelicula.application.usecase.DeletePeliculaUseCase;
+import es.etg.daw.dawes.sinessa.pelicula.application.usecase.EditPeliculaUseCase;
+import es.etg.daw.dawes.sinessa.pelicula.application.usecase.FindPeliculaUseCase;
 import lombok.RequiredArgsConstructor;
 
 @Configuration 
@@ -43,6 +45,16 @@ public class PokemonConfig {
     @Bean 
     public DeletePeliculaService deletePeliculaService(){
         return new DeletePeliculaService(deletePeliculaUseCase());
+    }
+
+    @Bean 
+    public EditPeliculaUseCase editPeliculaUseCase(){
+        return new EditPeliculaUseCase();
+    }
+
+    @Bean 
+    public EditPeliculaService editPeliculaService(){
+        return new EditPeliculaService(editPeliculaUseCase());
     }
 
     
