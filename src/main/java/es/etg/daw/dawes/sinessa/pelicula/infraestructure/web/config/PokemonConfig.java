@@ -11,19 +11,22 @@ import es.etg.daw.dawes.sinessa.pelicula.application.usecase.CreatePeliculaUseCa
 import es.etg.daw.dawes.sinessa.pelicula.application.usecase.DeletePeliculaUseCase;
 import es.etg.daw.dawes.sinessa.pelicula.application.usecase.EditPeliculaUseCase;
 import es.etg.daw.dawes.sinessa.pelicula.application.usecase.FindPeliculaUseCase;
+import es.etg.daw.dawes.sinessa.pelicula.domain.repository.PeliculaRepository;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
 public class PokemonConfig {
 
-    @Bean
-    public CreatePeliculaUseCase createPeliculaUseCase() {
-        return new CreatePeliculaUseCase();
-    }
+    private final PeliculaRepository peliculaRepository;
 
     @Bean
-    public CreatePeliculaService createPeliculaService() {
+    public CreatePeliculaUseCase createPeliculaUseCase(){
+        return new CreatePeliculaUseCase(peliculaRepository);
+    }
+
+    @Bean 
+    public CreatePeliculaService createPeliculaService(){
         return new CreatePeliculaService(createPeliculaUseCase());
     }
 

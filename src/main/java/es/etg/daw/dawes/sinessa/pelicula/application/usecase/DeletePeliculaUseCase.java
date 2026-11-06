@@ -1,7 +1,14 @@
 package es.etg.daw.dawes.sinessa.pelicula.application.usecase;
 
-public class DeletePeliculaUseCase {
-    public void delete(int id) {
+import es.etg.daw.dawes.sinessa.pelicula.domain.repository.PeliculaRepository;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor 
+public class DeletePeliculaUseCase {
+
+    public PeliculaRepository peliculaRepository;
+
+    public void delete(int id) {
+        peliculaRepository.deleteById(id);
     }
 }

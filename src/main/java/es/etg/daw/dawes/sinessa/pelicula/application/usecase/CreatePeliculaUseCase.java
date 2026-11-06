@@ -4,8 +4,13 @@ import java.time.LocalDateTime;
 
 import es.etg.daw.dawes.sinessa.pelicula.application.command.CreatePeliculaCommand;
 import es.etg.daw.dawes.sinessa.pelicula.domain.model.Pelicula;
+import es.etg.daw.dawes.sinessa.pelicula.domain.repository.PeliculaRepository;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor 
 public class CreatePeliculaUseCase {
+
+    public PeliculaRepository peliculaRepository;
 
     public Pelicula create(CreatePeliculaCommand comando) {
 
@@ -18,6 +23,7 @@ public class CreatePeliculaUseCase {
                 .duracion(comando.duracion())
                 .fechaEstreno(comando.fechaEstreno())
                 .fechaCreacion(LocalDateTime.now()).build();
-        return pelicula;
+
+        return peliculaRepository.save(pelicula);
     }
 }
