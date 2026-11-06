@@ -10,6 +10,6 @@ public class EditPeliculaUseCase {
     public Pelicula update(EditPeliculaCommand command) {
         return new Pelicula(command.id(), "Pelicula" + command.id(), command.imagen(),
                 "detalles", command.sinopsis(), "genero", command.duracion(),
-                "2026-12-01", LocalDateTime.now());
+                LocalDateTime.of(1999, 9, 29, 23, 59), LocalDateTime.now());
     }
 }

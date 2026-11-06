@@ -7,8 +7,8 @@ import es.etg.daw.dawes.sinessa.pelicula.application.usecase.CreatePeliculaUseCa
 import es.etg.daw.dawes.sinessa.pelicula.domain.model.Pelicula;
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor 
-@Service 
+@AllArgsConstructor
+@Service
 public class CreatePeliculaService {
 
     private final CreatePeliculaUseCase createPeliculaUseCase;

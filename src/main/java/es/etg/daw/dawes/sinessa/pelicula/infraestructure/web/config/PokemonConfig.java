@@ -13,49 +13,48 @@ import es.etg.daw.dawes.sinessa.pelicula.application.usecase.EditPeliculaUseCase
 import es.etg.daw.dawes.sinessa.pelicula.application.usecase.FindPeliculaUseCase;
 import lombok.RequiredArgsConstructor;
 
-@Configuration 
-@RequiredArgsConstructor 
+@Configuration
+@RequiredArgsConstructor
 public class PokemonConfig {
 
-    @Bean 
-    public CreatePeliculaUseCase createPeliculaUseCase(){
+    @Bean
+    public CreatePeliculaUseCase createPeliculaUseCase() {
         return new CreatePeliculaUseCase();
     }
 
-    @Bean 
-    public CreatePeliculaService createPeliculaService(){
+    @Bean
+    public CreatePeliculaService createPeliculaService() {
         return new CreatePeliculaService(createPeliculaUseCase());
     }
 
-    @Bean 
-    public FindPeliculaUseCase findPeliculaUseCase(){
+    @Bean
+    public FindPeliculaUseCase findPeliculaUseCase() {
         return new FindPeliculaUseCase();
     }
 
-    @Bean 
-    public FindPeliculaService findPeliculaService(){
+    @Bean
+    public FindPeliculaService findPeliculaService() {
         return new FindPeliculaService(findPeliculaUseCase());
     }
 
-    @Bean 
-    public DeletePeliculaUseCase deletePeliculaUseCase(){
+    @Bean
+    public DeletePeliculaUseCase deletePeliculaUseCase() {
         return new DeletePeliculaUseCase();
     }
 
-    @Bean 
-    public DeletePeliculaService deletePeliculaService(){
+    @Bean
+    public DeletePeliculaService deletePeliculaService() {
         return new DeletePeliculaService(deletePeliculaUseCase());
     }
 
-    @Bean 
-    public EditPeliculaUseCase editPeliculaUseCase(){
+    @Bean
+    public EditPeliculaUseCase editPeliculaUseCase() {
         return new EditPeliculaUseCase();
     }
 
-    @Bean 
-    public EditPeliculaService editPeliculaService(){
+    @Bean
+    public EditPeliculaService editPeliculaService() {
         return new EditPeliculaService(editPeliculaUseCase());
     }
 
-    
 }

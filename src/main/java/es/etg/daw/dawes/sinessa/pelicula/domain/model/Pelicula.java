@@ -18,7 +18,7 @@ public class Pelicula {
     private String sinopsis;
     private String genero;
     private int duracion;
-    private String fechaEstreno;
+    private LocalDateTime fechaEstreno;
     private LocalDateTime fechaCreacion;
 
 }
