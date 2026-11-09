@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
-public class PokemonConfig {
+public class PeliculaConfig {
 
     private final PeliculaRepository peliculaRepository;
 
