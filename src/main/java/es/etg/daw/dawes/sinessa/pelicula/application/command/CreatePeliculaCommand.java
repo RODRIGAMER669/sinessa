@@ -1,6 +1,6 @@
 package es.etg.daw.dawes.sinessa.pelicula.application.command;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,5 +17,5 @@ public class CreatePeliculaCommand {
     private String sinopsis;
     private String genero;
     private int duracion;
-    private LocalDateTime fechaEstreno;
+    private LocalDate fechaEstreno;
 }

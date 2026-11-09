@@ -1,9 +1,9 @@
 package es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record PeliculaResponse(int id, String titulo, String imagen, String detalles,
                 String sinopsis, String genero, int duracion,
-                LocalDateTime fechaEstreno, LocalDateTime fechaCreacion) {
+                LocalDate fechaEstreno, LocalDate fechaCreacion) {
 
 }

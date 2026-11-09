@@ -1,6 +1,6 @@
 package es.etg.daw.dawes.sinessa.pelicula.application.usecase;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import es.etg.daw.dawes.sinessa.pelicula.application.command.CreatePeliculaCommand;
 import es.etg.daw.dawes.sinessa.pelicula.domain.model.Pelicula;
@@ -22,7 +22,7 @@ public class CreatePeliculaUseCase {
                 .genero(comando.genero())
                 .duracion(comando.duracion())
                 .fechaEstreno(comando.fechaEstreno())
-                .fechaCreacion(LocalDateTime.now()).build();
+                .fechaCreacion(LocalDate.now()).build();
 
         return peliculaRepository.save(pelicula);
     }

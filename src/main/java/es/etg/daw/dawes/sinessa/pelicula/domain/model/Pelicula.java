@@ -1,6 +1,6 @@
 package es.etg.daw.dawes.sinessa.pelicula.domain.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +18,7 @@ public class Pelicula {
     private String sinopsis;
     private String genero;
     private int duracion;
-    private LocalDateTime fechaEstreno;
-    private LocalDateTime fechaCreacion;
+    private LocalDate fechaEstreno;
+    private LocalDate fechaCreacion;
 
 }
