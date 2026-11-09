@@ -7,7 +7,7 @@ import es.etg.daw.dawes.sinessa.pelicula.domain.model.Pelicula;
 import es.etg.daw.dawes.sinessa.pelicula.domain.repository.PeliculaRepository;
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor 
+@AllArgsConstructor
 public class CreatePeliculaUseCase {
 
     public PeliculaRepository peliculaRepository;

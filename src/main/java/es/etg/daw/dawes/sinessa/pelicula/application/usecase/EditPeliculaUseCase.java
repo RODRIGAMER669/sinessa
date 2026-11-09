@@ -1,21 +1,23 @@
 package es.etg.daw.dawes.sinessa.pelicula.application.usecase;
 
-import java.time.LocalDateTime;
-
 import es.etg.daw.dawes.sinessa.pelicula.application.command.EditPeliculaCommand;
 import es.etg.daw.dawes.sinessa.pelicula.domain.model.Pelicula;
 import es.etg.daw.dawes.sinessa.pelicula.domain.repository.PeliculaRepository;
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor 
+@AllArgsConstructor
 public class EditPeliculaUseCase {
 
-    public PeliculaRepository peliculaRepository;
+    private final PeliculaRepository peliculaRepository;
+    private final FindPeliculaByIdUseCase findPeliculaByIdUseCase;
 
     public Pelicula update(EditPeliculaCommand command) {
-        
-        return new Pelicula(command.id(), "Pelicula" + command.id(), command.imagen(),
-                "detalles", command.sinopsis(), "genero", command.duracion(),
-                LocalDateTime.of(1999, 9, 29, 23, 59), LocalDateTime.now());
+        Pelicula pelicula = findPeliculaByIdUseCase.findById(command.id());
+
+        pelicula.setImagen(command.imagen());
+        pelicula.setSinopsis(command.sinopsis());
+        pelicula.setDuracion(command.duracion());
+
+        return peliculaRepository.save(pelicula);
     }
 }

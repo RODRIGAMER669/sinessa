@@ -11,6 +11,7 @@ import es.etg.daw.dawes.sinessa.pelicula.application.usecase.CreatePeliculaUseCa
 import es.etg.daw.dawes.sinessa.pelicula.application.usecase.DeletePeliculaUseCase;
 import es.etg.daw.dawes.sinessa.pelicula.application.usecase.EditPeliculaUseCase;
 import es.etg.daw.dawes.sinessa.pelicula.application.usecase.FindPeliculaUseCase;
+import es.etg.daw.dawes.sinessa.pelicula.application.usecase.FindPeliculaByIdUseCase;
 import es.etg.daw.dawes.sinessa.pelicula.domain.repository.PeliculaRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -21,18 +22,18 @@ public class PokemonConfig {
     private final PeliculaRepository peliculaRepository;
 
     @Bean
-    public CreatePeliculaUseCase createPeliculaUseCase(){
+    public CreatePeliculaUseCase createPeliculaUseCase() {
         return new CreatePeliculaUseCase(peliculaRepository);
     }
 
-    @Bean 
-    public CreatePeliculaService createPeliculaService(){
+    @Bean
+    public CreatePeliculaService createPeliculaService() {
         return new CreatePeliculaService(createPeliculaUseCase());
     }
 
     @Bean
     public FindPeliculaUseCase findPeliculaUseCase() {
-        return new FindPeliculaUseCase();
+        return new FindPeliculaUseCase(peliculaRepository);
     }
 
     @Bean
@@ -42,7 +43,7 @@ public class PokemonConfig {
 
     @Bean
     public DeletePeliculaUseCase deletePeliculaUseCase() {
-        return new DeletePeliculaUseCase();
+        return new DeletePeliculaUseCase(peliculaRepository, findPeliculaByIdUseCase());
     }
 
     @Bean
@@ -52,12 +53,17 @@ public class PokemonConfig {
 
     @Bean
     public EditPeliculaUseCase editPeliculaUseCase() {
-        return new EditPeliculaUseCase();
+        return new EditPeliculaUseCase(peliculaRepository, findPeliculaByIdUseCase());
     }
 
     @Bean
     public EditPeliculaService editPeliculaService() {
         return new EditPeliculaService(editPeliculaUseCase());
+    }
+
+    @Bean
+    public FindPeliculaByIdUseCase findPeliculaByIdUseCase() {
+        return new FindPeliculaByIdUseCase(peliculaRepository);
     }
 
 }
