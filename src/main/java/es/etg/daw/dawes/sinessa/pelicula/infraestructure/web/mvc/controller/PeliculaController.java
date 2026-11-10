@@ -34,13 +34,14 @@ public class PeliculaController {
     private final FindPeliculaService findPeliculaService;
     private final DeletePeliculaService deletePeliculaService;
     private final EditPeliculaService editPeliculaService;
+    private final PeliculaMapper peliculaMapper;
 
+    @PostMapping 
     @ResponseBody
-    @PostMapping
     public PeliculaResponse createPelicula(PeliculaRequest request) {
-        CreatePeliculaCommand comando = PeliculaMapper.toCommand(request);
+        CreatePeliculaCommand comando = peliculaMapper.toCommand(request);
         Pelicula pelicula = createPeliculaService.createPelicula(comando);
-        return PeliculaMapper.toResponse(pelicula);
+        return peliculaMapper.toResponse(pelicula);
     }
 
     @GetMapping
@@ -48,7 +49,7 @@ public class PeliculaController {
     public List<PeliculaResponse> allPeliculas() {
         return findPeliculaService.findAll()
                 .stream()
-                .map(PeliculaMapper::toResponse)
+                .map(peliculaMapper::toResponse)
                 .toList();
     }
 
@@ -61,9 +62,9 @@ public class PeliculaController {
     @ResponseBody
     @PutMapping("/{id}")
     public PeliculaResponse editPelicula(@PathVariable int id, @RequestBody PeliculaRequest peliculaRequest) {
-        EditPeliculaCommand comando = PeliculaMapper.toCommand(id, peliculaRequest);
+        EditPeliculaCommand comando = peliculaMapper.toCommand(id, peliculaRequest);
         Pelicula pelicula = editPeliculaService.update(comando);
-        return PeliculaMapper.toResponse(pelicula);
+        return peliculaMapper.toResponse(pelicula);
     }
 
 }
