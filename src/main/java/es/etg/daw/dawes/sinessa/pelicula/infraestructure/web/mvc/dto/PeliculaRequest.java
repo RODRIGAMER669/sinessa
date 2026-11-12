@@ -8,20 +8,20 @@ import jakarta.validation.constraints.Positive;
 
 public record PeliculaRequest(
     
-    @NotBlank 
+    @NotBlank (message = "{pelicula.valid.titulo.no_vacio}")
     String titulo, String imagen, 
     
-    @NotBlank
+    @NotBlank (message = "{pelicula.valid.detalles.no_vacio}")
     String detalles,
 
-    @NotBlank 
+    @NotBlank (message = "{pelicula.valid.sinopsis.no_vacio}")
     String sinopsis, 
     
-    @NotBlank 
+    @NotBlank (message = "{pelicula.valid.genero.no_vacio}")
     String genero, 
     
-    @Positive 
-    @NotBlank 
+    @Positive (message = "{pelicula.valid.duracion.positiva}")
+    @NotBlank (message = "{pelicula.valid.duracion.no_vacio}")
     int duracion, LocalDate fechaEstreno) {
 
 }
