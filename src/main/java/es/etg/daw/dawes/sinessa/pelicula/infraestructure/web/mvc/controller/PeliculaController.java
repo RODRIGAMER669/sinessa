@@ -23,6 +23,7 @@ import es.etg.daw.dawes.sinessa.pelicula.domain.model.Pelicula;
 import es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mapper.PeliculaMapper;
 import es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc.dto.PeliculaRequest;
 import es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc.dto.PeliculaResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -36,9 +37,9 @@ public class PeliculaController {
     private final EditPeliculaService editPeliculaService;
     private final PeliculaMapper peliculaMapper;
 
-    @PostMapping 
+    @PostMapping
     @ResponseBody
-    public PeliculaResponse createPelicula(PeliculaRequest request) {
+    public PeliculaResponse createPelicula(@Valid PeliculaRequest request) {
         CreatePeliculaCommand comando = peliculaMapper.toCommand(request);
         Pelicula pelicula = createPeliculaService.createPelicula(comando);
         return peliculaMapper.toResponse(pelicula);

@@ -2,8 +2,26 @@ package es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc.dto;
 
 import java.time.LocalDate;
 
-public record PeliculaRequest(String titulo, String imagen, String detalles,
-                String sinopsis, String genero, int duracion,
-                LocalDate fechaEstreno) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
+
+public record PeliculaRequest(
+    
+    @NotBlank 
+    String titulo, String imagen, 
+    
+    @NotBlank
+    String detalles,
+
+    @NotBlank 
+    String sinopsis, 
+    
+    @NotBlank 
+    String genero, 
+    
+    @Positive 
+    @NotBlank 
+    int duracion, LocalDate fechaEstreno) {
 
 }
