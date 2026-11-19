@@ -3,8 +3,6 @@ package es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc.dto;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.NumberFormat;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
