@@ -2,6 +2,7 @@ package es.etg.daw.dawes.sinessa.pelicula.infraestructure.web.mvc.dto;
 
 import java.time.LocalDate;
 
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +11,10 @@ import jakarta.validation.constraints.Positive;
 public record PeliculaRequest(
     
     @NotBlank (message = "{pelicula.valid.titulo.no_vacio}")
-    String titulo, String imagen, 
+    String titulo, 
+    
+    @URL(message = "{pelicula.valid.imagen.url}")
+    String imagen, 
     
     @NotBlank (message = "{pelicula.valid.detalles.no_vacio}")
     String detalles,
@@ -23,9 +27,9 @@ public record PeliculaRequest(
     
     @Positive (message = "{pelicula.valid.duracion.positiva}")
     @NotNull (message = "{pelicula.valid.duracion.no_vacio}")
-    int duracion, 
+    Integer duracion, 
     
-    @NotNull(message = "{pelicula.valid.fecha.no_vacia")
+    @NotNull(message = "{pelicula.valid.fecha.no_vacia}")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     LocalDate fechaEstreno) {
 

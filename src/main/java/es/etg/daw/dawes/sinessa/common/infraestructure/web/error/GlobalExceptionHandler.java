@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-
-    //Aquí procesamos las excpciones de tipo NullPointer que se den en toda la aplicación de forma global.
 	@ExceptionHandler(NullPointerException.class)
 	public ResponseEntity<String> nullPointerHandler(NullPointerException nfe) {
         String msg = nfe.getMessage();
@@ -23,7 +21,7 @@ public class GlobalExceptionHandler {
 
 		return ResponseEntity
                 .status(cr.getStatus())
-                .contentType(MediaType.TEXT_HTML) // Necesario para que el navegador sepa el formato de la respuesta (html)
+                .contentType(MediaType.TEXT_HTML)
                 .body(html);
 	}
 
