@@ -1,7 +1,5 @@
 # Arquitectura y estructura
 
-# Arquitectura y estructura
-
 Sinessa está construido con Spring Boot y una arquitectura Clean organizada por dominio. Con ella, las reglas de negocio quedan separadas de los detalles web y de almacenamiento.
 
 El código se divide en tres capas: dominio, aplicación e infraestructura. Las dependencias van siempre hacia dentro: la infraestructura conoce a la aplicación y al dominio, pero el dominio no sabe nada de HTTP ni de cómo se guardan los datos. Esto evita que un cambio en la interfaz obligue a tocar las reglas del negocio, y al revés.
@@ -28,10 +26,6 @@ Contiene la lógica de cada operación: **crear**, **listar**, **editar** y **el
 ### Infraestructura (`pelicula/infraestructure`)
 
 Contiene los detalles técnicos que rodean al núcleo de la aplicación. En la parte web están el controlador `PeliculaController`, los DTO de entrada y salida con sus validaciones, el mapper `PeliculaMapper` y la configuración `PeliculaConfig`, que registra los casos de uso y servicios como beans de Spring. En la parte de datos está el repositorio mock `PeliculaRepositoryMockImpl`, que implementa el contrato del dominio guardando las películas en memoria. El tratamiento de errores común está en `common/infraestructure/web/error`.
-
-## Flujo de una petición
-
-En una operación HTTP, `PeliculaController` recibe la petición, convierte los datos de transporte con `PeliculaMapper` y llama al servicio de aplicación correspondiente. El servicio ejecuta el caso de uso y trabaja con el repositorio definido por el dominio; el adaptador mock resuelve la operación sobre un mapa en memoria.
 
 ## Flujo de una petición
 
