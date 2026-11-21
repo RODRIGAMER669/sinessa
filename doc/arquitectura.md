@@ -17,10 +17,6 @@ Esta combinación nos aporta:
 
 ## Capas
 
-## Capas
-
-## Capas
-
 ### Dominio (`pelicula/domain`)
 
 Es el núcleo de la aplicación y no depende de ninguna otra capa. Contiene el modelo `Pelicula`, con sus datos (título, imagen, detalles, sinopsis, género, duración y fechas de estreno y creación), y los contratos de repositorio (`CRUDRepository` y `PeliculaRepository`). Estos contratos solo definen qué operaciones existen, como crear, listar, buscar o eliminar, y dejan a la infraestructura decidir cómo se guardan los datos.
