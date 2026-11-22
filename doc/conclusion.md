@@ -10,3 +10,7 @@
 ## Víctor Sánchez García
 
 > Durante el desarrollo del proyecto he comprendido la importancia que tiene tanto la arquitectura clean como la aplicación del vertical slicing, esto no solo hace que el proyecto quede más ordenado, también consigue que el ambiente de trabajo sea menos caótico y más fácil de comprender. No obstante también se debe mencionar la significante mejora que aporta spring boot al proyecto mediante la inyección de dependencias y la inversión de control, volviendo el desarrollo mucho más ágil.
+
+## Aitor Rebato Moreno
+
+> Dividir el proyecto en dominio, infraestructura y aplicación usando Vertical slicing permite dividir las responsabilidades del proyecto, escalarlo cómodamente para añadir nuevas funciones y conexiones y también para saber en caso de que ocurra algún error el poder localizar dicho error y gestionarlo.
