@@ -6,7 +6,7 @@
 
 Sinessa es una aplicación web desarrollada con Spring Boot que permite dar de alta películas, consultar el catálogo, modificar algunos datos y retirar películas.
 
-Se ha construido con **Vertical Slicing** y **arquitectura Clean**, aplicando inversión de control e **inyección de dependencias** para reducir el acoplamiento entre componentes y facilitar el mantenimiento y la evolución del proyecto.
+Se ha construido con **Vertical Slicing** y **arquitectura Clean**, aplicando **inversión de control** e **inyección de dependencias** para reducir el acoplamiento entre componentes y facilitar el mantenimiento y la evolución del proyecto.
 
 ## Empezar
 
