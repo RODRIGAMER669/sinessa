@@ -75,4 +75,34 @@ No se automatiza aquí la ejecución de pruebas; los siguientes escenarios sirve
 
 ## Capturas y evidencia de ejecución
 
-Evidencias [img](img)
+Las siguientes capturas documentan la ejecución del formulario, el alta, el listado y una respuesta de validación:
+
+### Formulario de alta vacío
+
+![Formulario de alta de películas vacío](img/formulario.png)
+
+La página presenta los campos de título, imagen, detalles, sinopsis, género, duración y fecha de estreno.
+
+### Formulario con datos
+
+![Formulario de alta rellenado](img/formularioRelleno.png)
+
+Ejemplo de una película introducida.
+
+### Alta completada
+
+![Confirmación HTML del alta de una película](img/altaValida.png)
+
+La respuesta muestra los datos registrados y el identificador asignado de forma automática.
+
+### Catálogo consultado
+
+![Respuesta de consulta del catálogo de películas](img/listar.png)
+
+Se observan las tres películas de ejemplo y dos películas añadidas durante la sesión, con sus ids y campos, estas últimas son temporales han estar cargadas en memoria.
+
+### Errores de validación
+
+![Mensajes de validación al enviar datos incorrectos](img/msgValidacion.png)
+
+La respuesta por parte del servidor cuando no se introduce los datos de forma no correcta.
