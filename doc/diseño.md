@@ -1,75 +1,86 @@
-## Diseño
+# Diseño
 
-La arquitectura se describe en [Arquitectura y estructura](arquitectura.md).
+## Arquitectura
 
-### Nivel 1: capas
+Sinessa sigue una arquitectura por capas inspirada en Clean Architecture y organiza el código por funcionalidad (vertical slice de películas). Las dependencias apuntan hacia el dominio: la infraestructura implementa contratos definidos en el dominio, mientras que las reglas de aplicación no dependen de Spring MVC ni del repositorio concreto.
 
 ```mermaid
-flowchart BT
-    D["Dominio"]
-    A["Aplicación"]
-    I["Infraestructura"]
-    A -.-> D
-    I -.-> A
-    I -.-> D
+flowchart LR
+    Cliente[Cliente HTTP] --> Web[Controlador y DTO]
+    Web --> Servicios[Servicios de aplicación]
+    Servicios --> Casos[Casos de uso]
+    Casos --> Dominio[Modelo y contrato de repositorio]
+    Repo[Repositorio mock en memoria] -. implementa .-> Dominio
+    Web --> Mapper[Mapper]
+    Mapper --> Servicios
 ```
 
-### Nivel 2: paquetes
+La configuración `PeliculaConfig` registra los casos de uso y servicios como beans de Spring. `PeliculaRepositoryMockImpl` implementa el contrato `PeliculaRepository`, por lo que la aplicación puede sustituir esa implementación sin cambiar los casos de uso.
 
-```
+## Niveles y paquetes
+
+```text
 es.etg.daw.dawes.sinessa
+├── SinessaApplication.java
 ├── common/infraestructure/web/error
 └── pelicula
     ├── domain
-    │   ├── model
+    │   ├── model/Pelicula.java
     │   └── repository
     ├── application
     │   ├── command
-    │   ├── usecase
-    │   └── service
+    │   ├── service
+    │   └── usecase
     └── infraestructure
-        ├── web
-        │   ├── mvc/controller
-        │   ├── mvc/dto
-        │   ├── mapper
-        │   └── config
-        └── db/repository/mock
+        ├── db/repository/mock
+        └── web
+            ├── config
+            ├── mapper
+            └── mvc
+                ├── controller
+                └── dto
 ```
 
-## Gestión de errores y excepciones
+- **Dominio:** `Pelicula`, `CRUDRepository` y `PeliculaRepository` describen el modelo y las operaciones.
+- **Aplicación:** comandos, servicios y casos de uso para crear, listar, buscar por id, editar y eliminar.
+- **Infraestructura:** controlador HTTP, DTO, mapper, configuración Spring y repositorio en memoria.
+- **Errores comunes:** `GlobalExceptionHandler` centraliza el manejo de `NullPointerException`.
 
-La aplicación gestiona los errores en dos puntos y deja el resto al comportamiento por defecto de Spring.
+## Flujo de petición
 
-### Datos de entrada inválidos
+Para una consulta, el controlador invoca el servicio, el caso de uso consulta el contrato de repositorio y el mapper convierte el resultado a DTO. Para el alta, los parámetros se vinculan a `PeliculaRequest`, Jakarta Validation comprueba las restricciones, el mapper crea un comando y el caso de uso añade la entidad al repositorio.
 
-Al crear una película, `@Valid` comprueba el `PeliculaRequest`. Si algún campo no cumple las reglas, el controlador captura la excepción `MethodArgumentNotValidException` y responde con un error 400 y una página que lista cada campo con su mensaje. Los mensajes están centralizados en `messages.properties`, y el texto se escapa antes de mostrarse para evitar inyección de HTML.
+## Errores y excepciones
 
-### Errores internos
-
-`GlobalExceptionHandler` (`common/infraestructure/web/error`) captura `NullPointerException` y responde con un error 500 y una página con la fecha, el código y el mensaje (`CustomResponse`).
-
-### Película que no existe
-
-Editar o eliminar un id inexistente hace que `FindPeliculaByIdUseCase` lance `NoSuchElementException`. Como no hay un manejador específico, Spring devuelve su respuesta de error por defecto (500) en lugar de un 404. Es una mejora pendiente.
-
-### Edición
-
-El `PUT` no valida los datos de entrada, y solo modifica `imagen`, `sinopsis` y `duracion`.
+- **Validación del alta:** los errores de `@Valid` producen HTTP 400 y una página HTML con los campos y mensajes. Se escapan los textos antes de incluirlos en HTML.
+- **Error interno nulo:** `GlobalExceptionHandler` convierte `NullPointerException` en HTTP 500 y genera una respuesta HTML con fecha, estado y mensaje.
+- **Identificador inexistente:** la búsqueda lanza `NoSuchElementException`; no existe un manejador específico y actualmente Spring resuelve la respuesta. Se recomienda añadir un error de dominio y traducirlo a HTTP 404.
+- **Edición:** el endpoint no aplica `@Valid`; actualmente solo se actualizan imagen, sinopsis y duración. Conviene validar la entrada y decidir/documentar explícitamente si los campos restantes son inmutables.
 
 ## Plan de pruebas
 
-Las pruebas son manuales, con `curl` o con el formulario `/formularioPelicula.html`. Se parte de los datos iniciales: tres películas con ids 1, 2 y 3.
+No se automatiza aquí la ejecución de pruebas; los siguientes escenarios sirven para una comprobación manual con `curl` o el formulario. Antes de cada caso, iniciar la aplicación y recordar que los datos vuelven a su estado inicial al reiniciarla.
 
-| Nº | Operación | Caso | Resultado esperado |
-| --- | --- | --- | --- |
-| 1 | Listar | `GET /peliculas` | 200 y JSON con las 3 películas iniciales |
-| 2 | Crear | Datos válidos | 200 y página con la película creada (id 4) |
-| 3 | Crear | Título vacío | 400 con el error del campo `titulo` |
-| 4 | Crear | Duración 0 | 400 con el error del campo `duracion` |
-| 5 | Crear | Imagen con URL inválida | 400 con el error del campo `imagen` |
-| 6 | Crear | Fecha con formato `1979-05-25` | Error de validación en `fechaEstreno` |
-| 7 | Editar | `PUT /peliculas/1` con imagen, sinopsis y duración | 200 y JSON con esos tres campos cambiados |
-| 8 | Editar | `PUT /peliculas/99` (no existe) | Error 500 por defecto |
-| 9 | Eliminar | `DELETE /peliculas/1` | 204 y la película ya no aparece en el listado |
-| 10 | Eliminar | `DELETE /peliculas/99` (no existe) | Error 500 por defecto |
+| Nº | Acción | Comprobación esperada |
+| --- | --- | --- |
+| 1 | `GET /peliculas` | HTTP 200 y listado JSON con los registros iniciales. |
+| 2 | `POST /peliculas` con datos válidos | Se crea el registro y se muestra una página HTML de confirmación. |
+| 3 | Alta con título vacío | HTTP 400 y mensaje de validación de `titulo`. |
+| 4 | Alta con duración cero o ausente | HTTP 400 y mensaje de validación de `duracion`. |
+| 5 | Alta con URL de imagen inválida | HTTP 400 y mensaje de validación de `imagen`. |
+| 6 | Alta con fecha mal formada | Error de vinculación/validación de la fecha. El formato esperado es `dd/MM/yyyy`. |
+| 7 | `PUT /peliculas/1` | La respuesta JSON refleja imagen, sinopsis y duración actualizadas. |
+| 8 | `DELETE /peliculas/1` | HTTP 204; el id deja de aparecer en el listado. |
+| 9 | Editar o eliminar id inexistente | La petición falla; no se garantiza HTTP 404 en esta versión. |
 
+## Capturas y evidencia de ejecución
+
+Guardar capturas propias en `doc/capturas/` cuando se ejecute la aplicación. Se recomienda incluir:
+
+1. El formulario de alta abierto en el navegador.
+2. Una confirmación de alta válida.
+3. La lista JSON de `GET /peliculas`.
+4. Una respuesta de validación con un dato incorrecto.
+5. Una captura de la ejecución de las pruebas manuales.
+
+En cada imagen, indicar qué caso muestra y la fecha de ejecución. Las capturas todavía deben añadirse; este repositorio no contiene evidencia visual de una ejecución.

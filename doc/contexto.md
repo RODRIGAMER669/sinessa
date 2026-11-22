@@ -1,40 +1,46 @@
 # Contexto de la aplicación
 
+## Problema del mundo real
 
-## Problema a resolver
+Un cine, cineclub o equipo que prepara una cartelera necesita mantener los datos de sus películas en un lugar común. Si cada interfaz conserva una copia propia, corregir títulos, fechas o sinopsis exige actualizar varios sitios y puede producir información distinta. Sinessa explora una solución pequeña: una API web que centraliza las operaciones básicas de un catálogo.
 
-Una web de películas, ya sea la de un cine, un cineclub o un catálogo en línea, necesita tener su listado de películas centralizado y accesible desde un servicio, para que cualquier interfaz (una web, una app móvil u otro sistema) pueda consultarlo y modificarlo. Sin un servicio así, cada interfaz tendría su propia copia de los datos y habría que mantenerlas por separado
+## Aplicaciones relacionadas
 
+IMDb, FilmAffinity y Letterboxd permiten consultar información cinematográfica y, según el servicio, valorarla o crear listas. Sinessa tiene otro alcance: es un prototipo de administración de un catálogo propio mediante operaciones CRUD. No pretende competir en cobertura, comunidad ni cantidad de información con esos servicios; permite estudiar una API de gestión sencilla y ampliable.
 
-## Aplicaciones que existen
+## Aportación y alcance
 
-Existen aplicaciones muy conocidas como FilmAffinity, IMDb o Letterboxd. Están pensadas para que el público consulte, puntúe y comente películas, no para que administre un catalogo propio.
+La aplicación permite crear, consultar, modificar y eliminar películas. Separar el dominio de la web y del almacenamiento facilita sustituir el repositorio en memoria por una base de datos en una evolución posterior. Incluye un formulario HTML para el alta, aunque su campo de fecha no coincide actualmente con el formato que espera el servidor; las operaciones también se pueden consumir mediante HTTP.
 
-## Qué aporta Sinessa
+El alcance actual es académico y local. No hay autenticación, roles, persistencia duradera ni interfaz completa de gestión. Los datos iniciales y los cambios se mantienen solo mientras está activo el proceso.
 
-Sinessa ofrece ese servicio de forma sencilla y centrada en lo esencial: dar de alta una película con sus datos validados, consultar el listado, corregir sus datos y retirarla cuando deja de estar en cartel. 
+## Actores y casos de uso
 
-## Casos de uso
+El actor principal es el **gestor del catálogo**, una persona o cliente externo que realiza peticiones HTTP. La aplicación no modela usuarios ni exige iniciar sesión (de momento).
 
-El actor de todos los casos de uso es el usuario que gestiona las películas.
+| Caso de uso | Descripción | Operación |
+| --- | --- | --- |
+| Consultar catálogo | Obtener todas las películas disponibles. | `GET /peliculas` |
+| Registrar película | Enviar los campos de una película; se validan y se añade al catálogo. | `POST /peliculas` |
+| Modificar película | Actualizar los campos admitidos de una película identificada por id. | `PUT /peliculas/{id}` |
+| Retirar película | Eliminar una película identificada por id. | `DELETE /peliculas/{id}` |
 
-1. **Crear película:** el usuario envía los datos de una película y la aplicación la valida y la guarda.
-2. **Listar películas:** el usuario consulta el listado completo.
-3. **Editar película:** el usuario modifica los datos de una película existente.
-4. **Eliminar película:** el usuario retira una película del catálogo.
+## Requisitos funcionales
 
-Si quieres más informacion sobre los casos de uso puedes consultar en [API y ejemplos](/doc/api.md).
+1. El sistema permite consultar el catálogo completo.
+2. El sistema permite registrar una película con título, imagen opcional, detalles, sinopsis, género, duración y fecha de estreno.
+3. El sistema valida los datos del alta: los campos de texto obligatorios no pueden estar vacíos; la duración debe ser positiva; la fecha debe poder convertirse a `LocalDate` con el formato de formulario `dd/MM/yyyy`; y la imagen, si se indica, debe ser una URL válida.
+4. El sistema permite modificar una película existente. En la implementación actual, la edición modifica imagen, sinopsis y duración.
+5. El sistema permite eliminar una película existente.
+6. Cada película expone un identificador y una fecha de creación asignados por la aplicación.
 
-## Requisitos
+## Requisitos no funcionales y restricciones
 
-### Funcionales
+1. La aplicación se ejecuta sobre Java 17 y Spring Boot, con servidor web embebido.
+2. La API usa HTTP y JSON para consultas/ediciones; el alta acepta parámetros de formulario y responde con HTML.
+3. La arquitectura separa dominio, aplicación e infraestructura para reducir dependencias entre reglas de negocio y tecnología.
+4. El repositorio es un mock en memoria: al reiniciar se recuperan las tres películas de ejemplo y se pierden los cambios.
+5. No se requiere autenticación en esta versión.
+6. Una búsqueda o modificación de un identificador inexistente no tiene todavía una respuesta 404 propia; el tratamiento depende de Spring y constituye una mejora pendiente.
 
-1. El usuario puede dar de alta una película con título, imagen, detalles, sinopsis, género, duración y fecha de estreno.
-2. El usuario puede consultar el listado de todas las películas.
-3. El usuario puede modificar los datos de una película existente.
-4. El usuario puede eliminar una película.
-
-### No funcionales
-
-1. Una película debe tener título, detalles, sinopsis y género no vacíos, una duración mayor que 0 y una fecha de estreno con formato `dd/MM/yyyy`.
-2. Los datos se guardan en memoria, por lo que no persisten al reiniciar.
+Para rutas, ejemplos y formatos, véase [API y ejemplos](api.md).

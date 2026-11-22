@@ -4,7 +4,7 @@
 
 ## ¿Qué es este proyecto?
 
-Sinessa es una aplicación web desarrollada con Spring Boot que actualmente permite dar de alta nuevas películas, consultar el listado completo, corregir sus datos y retirarlas cuando dejan de estar en cartel
+Sinessa es una aplicación web desarrollada con Spring Boot que permite dar de alta películas, consultar el catálogo, modificar algunos datos y retirar películas.
 
 Se ha construido con **Vertical Slicing** y **arquitectura Clean**, aplicando inversión de control e **inyección de dependencias** para reducir el acoplamiento entre componentes y facilitar el mantenimiento y la evolución del proyecto.
 
@@ -22,7 +22,7 @@ En Windows:
 mvnw.cmd spring-boot:run
 ```
 
-La aplicación usa el puerto 8080 por defecto. El formulario estático para crear una película está en `/formularioPelicula.html`
+La aplicación usa el puerto 8080 por defecto. El formulario estático para crear una película está en `/formularioPelicula.html`.
 
 ## Documentación detallada
 
@@ -31,7 +31,7 @@ La aplicación usa el puerto 8080 por defecto. El formulario estático para crea
 - [Ejecución y desarrollo](doc/desarrollo.md): requisitos, comandos Maven Wrapper y notas para contribuir.
 - [Contexto](doc/contexto.md).
 - [Diseño](doc/diseño.md).
-- [Manual usuario](doc/manual-usuario.md)
+- [Manual de usuario](doc/manual-usuario.md)
 
 ## Tecnologías principales
 
@@ -44,6 +44,7 @@ La aplicación usa el puerto 8080 por defecto. El formulario estático para crea
 - Jakarta Bean Validation
 
 ## Integrantes
+
 - Manuel Pavón.
 - Aitor Rebato.
 - Víctor Sánchez.

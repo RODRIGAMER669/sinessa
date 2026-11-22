@@ -4,8 +4,8 @@ La aplicación se está ejecutando en `http://localhost:8080`.
 
 | Método | Ruta | Resultado |
 | --- | --- | --- |
-| `GET` | `/peliculas` | Lista las peliculas en JSON. |
-| `POST` | `/peliculas` | Crea una pelicula desde datos de formulario, validando los campos y devuelve la pelicula creada en JSON. |
+| `GET` | `/peliculas` | Lista las películas en JSON. |
+| `POST` | `/peliculas` | Crea una película desde datos de formulario, valida los campos y devuelve una página HTML. |
 | `PUT` | `/peliculas/{id}` | Actualiza una pelicula y devuelve el recurso en JSON. |
 | `DELETE` | `/peliculas/{id}` | Elimina la pelicula |
 
@@ -15,11 +15,11 @@ La aplicación se está ejecutando en `http://localhost:8080`.
 curl http://localhost:8080/peliculas
 ```
 
-La respuesta contiene objetos con `id`, `titulo`, `imagen`, `detalles`, `sinopsis`, `genero`, `duracion`, `fechaEstreno` y `createdAt`.
+La respuesta contiene objetos con `id`, `titulo`, `imagen`, `detalles`, `sinopsis`, `genero`, `duracion`, `fechaEstreno` y `fechaCreacion`.
 
 ## Crear
 
-El controlador recibe `PeliculaRequest` como parámetro de formulario:
+El controlador recibe `PeliculaRequest` como parámetros de formulario. La fecha se convierte a `LocalDate` con formato `dd/MM/yyyy`:
 
 ```bash
 curl -X POST http://localhost:8080/peliculas \
@@ -30,7 +30,7 @@ curl -X POST http://localhost:8080/peliculas \
   --data-urlencode 'sinopsis=En el espacio nadie puede oír tus gritos' \
   --data-urlencode 'genero=Terror' \
   --data-urlencode 'duracion=117' \
-  --data-urlencode 'fechaEstreno=1979-05-25'
+  --data-urlencode 'fechaEstreno=25/05/1979'
 ```
 
 También está disponible el formulario del navegador en `http://localhost:8080/formularioPelicula.html`.
@@ -63,4 +63,4 @@ Los identificadores `1`, `2` y `3` se precargan en el repositorio mock.
 - `duracion`: es obligatoria y debe ser mayor que 0.
 - `fechaEstreno`: es obligatoria y se envía con formato `dd/MM/yyyy`.
 
-Las validaciones se aplican en el endpoint de creación mediante `@Valid`.
+Las validaciones se aplican en el endpoint de creación mediante `@Valid`. La edición no aplica actualmente estas validaciones.

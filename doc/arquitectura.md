@@ -29,7 +29,7 @@ Contiene los detalles técnicos que rodean al núcleo de la aplicación. En la p
 
 ## Flujo de una petición
 
-En una operación HTTP, `PeliculaController` recibe la petición y valida los datos de entrada (si no son válidos, responde con un error 400). Después, `PeliculaMapper` los convierte en un comando y el controlador llama al servicio correspondiente, que delega en su caso de uso. El caso de uso aplica la lógica y trabaja con el contrato `PeliculaRepository` del dominio; en este proyecto lo resuelve `PeliculaRepositoryMockImpl` con un mapa en memoria. una vez obtenida la pelicula se devuelve y el mapper la convierte en `PeliculaResponse` para la respuesta.
+En una operación HTTP, `PeliculaController` recibe la petición. En el alta, Jakarta Validation comprueba los datos; si no son válidos, el controlador responde con HTTP 400. Después, `PeliculaMapper` convierte los datos en un comando y el controlador llama al servicio correspondiente, que delega en su caso de uso. El caso de uso aplica la lógica y trabaja con el contrato `PeliculaRepository` del dominio; en este proyecto lo resuelve `PeliculaRepositoryMockImpl` con un mapa en memoria. Una vez obtenida la película, el mapper la convierte en `PeliculaResponse` para las operaciones que devuelven JSON.
 
 ## Persistencia y datos iniciales
 
