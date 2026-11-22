@@ -1,5 +1,7 @@
 # sinessa
 
+**Versión:** 0.0.1-SNAPSHOT
+
 ## ¿Qué es este proyecto?
 
 Sinessa es una aplicación web desarrollada con Spring Boot que actualmente permite dar de alta nuevas películas, consultar el listado completo, corregir sus datos y retirarlas cuando dejan de estar en cartel
