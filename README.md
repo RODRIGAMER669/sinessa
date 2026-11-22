@@ -29,6 +29,9 @@ La aplicación usa el puerto 8080 por defecto. El formulario estático para crea
 - [Arquitectura y estructura del código](doc/arquitectura.md): capas, paquetes y flujo de una petición.
 - [API y ejemplos](doc/api.md): rutas, formatos de entrada, validaciones y comandos `curl`.
 - [Ejecución y desarrollo](doc/desarrollo.md): requisitos, comandos Maven Wrapper y notas para contribuir.
+- [Contexto](doc/contexto.md).
+- [Diseño](doc/diseño.md).
+- [Manual usuario](doc/manual-usuario.md)
 
 ## Tecnologías principales
 
