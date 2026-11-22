@@ -58,7 +58,7 @@ El `PUT` no valida los datos de entrada, y solo modifica `imagen`, `sinopsis` y 
 
 ## Plan de pruebas
 
-Las pruebas son manuales, con `curl` o con el formulario `/formularioPelicula.html`, y una automática con `./mvnw test`. Se parte de los datos iniciales: tres películas con ids 1, 2 y 3.
+Las pruebas son manuales, con `curl` o con el formulario `/formularioPelicula.html`. Se parte de los datos iniciales: tres películas con ids 1, 2 y 3.
 
 | Nº | Operación | Caso | Resultado esperado |
 | --- | --- | --- | --- |
@@ -72,5 +72,4 @@ Las pruebas son manuales, con `curl` o con el formulario `/formularioPelicula.ht
 | 8 | Editar | `PUT /peliculas/99` (no existe) | Error 500 por defecto |
 | 9 | Eliminar | `DELETE /peliculas/1` | 204 y la película ya no aparece en el listado |
 | 10 | Eliminar | `DELETE /peliculas/99` (no existe) | Error 500 por defecto |
-| 11 | Arranque | `./mvnw test` | Pasa `contextLoads` (el contexto de Spring arranca) |
 

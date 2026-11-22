@@ -20,7 +20,7 @@ La aplicación se inicia en `http://localhost:8080` con la configuración actual
 
 | Aspecto | Herramienta |
 | --- | --- |
-| Gestión de versiones | Git [indica si usáis GitHub u otro, y la rama `feature/pelicula`] |
+| Gestión de versiones | Git y Github, y la rama `feature/pelicula`] |
 | Proyecto | Maven (`pom.xml`), con Maven Wrapper (`mvnw` y `mvnw.cmd`) |
 | Compilación | `./mvnw package`, con procesamiento de anotaciones de Lombok y MapStruct |
 | Lenguaje | Java 17 |
@@ -28,7 +28,7 @@ La aplicación se inicia en `http://localhost:8080` con la configuración actual
 | Librerías | Lombok, MapStruct y Jakarta Bean Validation |
 | Pruebas | JUnit con Spring Boot Test |
 | Documentación | Archivos Markdown en `doc/`, con diagramas Mermaid |
-| IDE | [por ejemplo, VS Code con el pack de extensiones de Spring Boot] |
+| IDE | Visual Studio Code |
 
 ## Versiones de las herramientas
 

@@ -23,13 +23,13 @@ El actor de todos los casos de uso es el usuario que gestiona las películas.
 3. **Editar película:** el usuario modifica los datos de una película existente.
 4. **Eliminar película:** el usuario retira una película del catálogo.
 
-SI queires mas informacion sobre los casos de uso peude consultar en [API y ejemplos](/doc/api.md).
+Si quieres más informacion sobre los casos de uso puedes consultar en [API y ejemplos](/doc/api.md).
 
 ## Requisitos
 
 ### Funcionales
 
-1. El usuario dpuede dar de alta una película con título, imagen, detalles, sinopsis, género, duración y fecha de estreno.
+1. El usuario puede dar de alta una película con título, imagen, detalles, sinopsis, género, duración y fecha de estreno.
 2. El usuario puede consultar el listado de todas las películas.
 3. El usuario puede modificar los datos de una película existente.
 4. El usuario puede eliminar una película.
@@ -37,4 +37,4 @@ SI queires mas informacion sobre los casos de uso peude consultar en [API y ejem
 ### No funcionales
 
 1. Una película debe tener título, detalles, sinopsis y género no vacíos, una duración mayor que 0 y una fecha de estreno con formato `dd/MM/yyyy`.
-2. los datos se guardan en memoria, por lo que no persisten al reiniciar.
+2. Los datos se guardan en memoria, por lo que no persisten al reiniciar.
