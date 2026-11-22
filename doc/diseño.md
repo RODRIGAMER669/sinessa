@@ -75,12 +75,4 @@ No se automatiza aquí la ejecución de pruebas; los siguientes escenarios sirve
 
 ## Capturas y evidencia de ejecución
 
-Guardar capturas propias en `doc/capturas/` cuando se ejecute la aplicación. Se recomienda incluir:
-
-1. El formulario de alta abierto en el navegador.
-2. Una confirmación de alta válida.
-3. La lista JSON de `GET /peliculas`.
-4. Una respuesta de validación con un dato incorrecto.
-5. Una captura de la ejecución de las pruebas manuales.
-
-En cada imagen, indicar qué caso muestra y la fecha de ejecución. Las capturas todavía deben añadirse; este repositorio no contiene evidencia visual de una ejecución.
+Evidencias [img](img)
